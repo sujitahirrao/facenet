@@ -1,8 +1,8 @@
 import os
 import shutil
 
-folder_path = "D:\\Machine Learning\\Arya.ai\\dataface\\train\\"
-new_folder = "D:\\Machine Learning\\Arya.ai\\dataface\\train_face\\"
+folder_path = "..\\dataface\\train\\"
+new_folder = "..\\dataface\\train_face\\"
 
 count = 0
 
