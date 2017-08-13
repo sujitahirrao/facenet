@@ -6,6 +6,12 @@ import tensorflow as tf
 import tensorflow.contrib.slim as slim
 
 
+# maxout_flag
+# 1: according to Maxout network from https://arxiv.org/pdf/1302.4389.pdf
+# 0: maxout with dimention reduction
+maxout_flag = 1
+
+
 # with reference to Maxout Network
 def maxout(layer_input, n_maxouts=1):
     with tf.variable_scope('maxout'):
@@ -88,21 +94,21 @@ def nn1(inputs, is_training=True, reuse=None, scope='NN1'):
                 # concat layer
                 net = slim.flatten(net)
 
-                # fc1 with maxout pooling size as p = 2
-                with tf.variable_scope('fc1'):
-                    net = maxout(net, n_maxouts=2)
+                if maxout_flag:
+                    # fc1 with maxout pooling size as p = 2
+                    with tf.variable_scope('fc1'):
+                        net = maxout(net, n_maxouts=2)
 
-                # fc2 with maxout pooling size as p = 2
-                with tf.variable_scope('fc2'):
-                    net = maxout(net, n_maxouts=2)
+                    # fc2 with maxout pooling size as p = 2
+                    with tf.variable_scope('fc2'):
+                        net = maxout(net, n_maxouts=2)
 
-                '''
-                net = slim.fully_connected(net, num_outputs=4096, activation_fn=None, scope='fc1')
-                net = maxout_reduction(net, 4096)
+                else:
+                    net = slim.fully_connected(net, num_outputs=4096, activation_fn=None, scope='fc1')
+                    net = maxout_reduction(net, 4096)
 
-                net = slim.fully_connected(net, num_outputs=4096, activation_fn=None, scope='fc2')
-                net = maxout_reduction(net, 4096)
-                '''
+                    net = slim.fully_connected(net, num_outputs=4096, activation_fn=None, scope='fc2')
+                    net = maxout_reduction(net, 4096)
                 
                 net = slim.fully_connected(net, num_outputs=128, activation_fn=None, scope='fc7128')
 
