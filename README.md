@@ -8,6 +8,7 @@ Currently this repo is compatible with Tensorflow r1.0.
 ## News
 | Date     | Update |
 |----------|--------|
+| 2017-08-13 | Added NN1 implementation
 | 2017-05-13 | Removed a bunch of older non-slim models. Moved the last bottleneck layer into the respective models. Corrected normalization of Center Loss. |
 | 2017-05-06 | Added code to [train a classifier on your own images](https://github.com/davidsandberg/facenet/wiki/Train-a-classifier-on-own-images). Renamed facenet_train.py to train_tripletloss.py and facenet_train_classifier.py to train_softmax.py. |
 | 2017-03-02 | Added pretrained models that generate 128-dimensional embeddings.|
